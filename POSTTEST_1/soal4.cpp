@@ -16,11 +16,11 @@ int main () {
     system("cls");
 
     string judul = R"(
-/============================\
-||                          ||
-||  MENUKAR NILAI VARIABEL  ||
-||                          ||
-\============================/)";
+=====================================
+|                                   |
+|  Soal 4 (MENUKAR NILAI VARIABEL)  |
+|                                   |
+=====================================)";
 
     cout << judul << endl;
     cout << "\nMasukkan Nilai Pertama: ";
