@@ -53,7 +53,7 @@ void lihatData() {
 
     if (jumlahData == 0) {
         cout << "\n (!) Belum Ada Data Yang Ditambhkan" << endl;
-        return;
+        jeda();
     } else {
         cout << "--- Lihat Data ---" << endl;
 
@@ -73,14 +73,52 @@ void lihatData() {
     }
 }
 
-void tukarPointer(Hewan *a, Hewan *b) {
+void tukarNilai(Hewan *a, Hewan *b) {
     Hewan temp = *a;
     *a = *b;
     *b = temp;
 }
 
+void bubbleSort() {
+    if (jumlahData == 0) {
+        cout << "(!) Tidak Ada Data Untuk Diurutkan!" << endl;
+        jeda();
+    } else {
+        for (int i = 0; i < jumlahData - 1; i++) {
+            for (int j = 0; jumlahData - i - 1; j++) {
+                Hewan *ptrBS1 = dataHewan[j];
+                Hewan *ptrBS2 = dataHewan[j + 1];
+
+                if ((*ptrBS1).namaHewan > (*ptrBS2).namaHewan) {
+                    tukarNilai(ptrBS1, ptrBS2);
+                }
+            }
+        } 
+        cout << "(+) Data Berhasil Diurutkan Berdasarkan Nama (A-Z)"
+    }
+}
+
+void menuUtama() {
+    char pilihan;
+    string header = "========================================";
+    do {
+        system("cls");
+
+        cout << header << endl;
+        cout << "     Pawcare Petshop & Dokter Hewan     " << endl;
+        cout << header << endl;
+        cout << "|  [1]. Tambah Data Hewan Baru         |" << endl;
+        cout << "|  [2]. Tampilkan Semua Data Hewan     |" << endl;
+        cout << "|  [1]. Tambah Data Hewan Baru     |"
+        cout << "|  [1]. Tambah Data Hewan Baru     |"
+        cout << "|  [1]. Tambah Data Hewan Baru     |"
+        cout << "|  [1]. Tambah Data Hewan Baru     |"
+    } while (pilihan != '7');
+    
+}
+
 int main() {
 
-    
+
     return 0;
 }
