@@ -25,23 +25,43 @@ void tambahHewan() {
         cout << "\n(!) Kapasitas Data Penuh!" << endl;
         jeda();
     } else {
-        Hewan *ptrHewan = &dataHewan[jumlahData];
+        while (true) {
+            bool cekId = false;
+            Hewan *ptrHewan = &dataHewan[jumlahData];
+            system("cls");
 
-        cout << "\n--- Tambah Data Hewan ---" << endl;
-        cout << "ID Hewan (Angka): ";
-        cin >> (*ptrHewan).idHewan;
-        cin.ignore();
-        cout << "Nama Hewan: ";
-        getline(cin, (*ptrHewan).namaHewan);
-        cout << "Jenis Hewan: ";
-        getline(cin, (*ptrHewan).jenisHewan);
-        cout << "Harga Hewan: Rp";
-        cin >> (*ptrHewan).hargaHewan;  
-        cin.ignore();
+            cout << "\n--- Tambah Data Hewan ---" << endl;
+            cout << "\nID Hewan (Angka): ";
+            cin >> (*ptrHewan).idHewan;
 
-        jumlahData++;
-        cout << "\n(+) Data Berhasil Ditambahkan" << endl;
-        jeda();
+            for (int i = 0; i < jumlahData; i++) {
+                if ((*ptrHewan).idHewan == dataHewan[i].idHewan) {
+                    cekId = true;
+                    break;
+                }
+            }
+
+            if (cekId) {
+                cout << "\n(!) ID Sudah Dipakai. Silahkan Gunakan ID Lain!" << endl;
+                jeda();
+                system("cls");
+                continue;
+            }
+
+            cin.ignore();
+            cout << "Nama Hewan: ";
+            getline(cin, (*ptrHewan).namaHewan);
+            cout << "Jenis Hewan: ";
+            getline(cin, (*ptrHewan).jenisHewan);
+            cout << "Harga Hewan: Rp";
+            cin >> (*ptrHewan).hargaHewan;  
+            cin.ignore();
+
+            jumlahData++;
+            cout << "\n(+) Data Berhasil Ditambahkan" << endl;
+            jeda();
+            break;
+        }
     }
 }
 
@@ -52,8 +72,9 @@ void lihatData() {
         cout << "\n (!) Belum Ada Data Yang Ditambahkan" << endl;
         jeda();
     } else {
+        system("cls");
         cout << "\n--- Lihat Data ---" << endl;
-
+        cout << endl;
         cout << header << endl;
         cout << "| " << setw(4) << left << "ID"
             << "| " << setw(25) << left << "Nama"
