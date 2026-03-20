@@ -295,7 +295,6 @@ void boyerMoore() {
     getline(cin, target);
 
     int ditemukan = 0;
-    cout << "\n--- Proses Pencarian Boyer-Moore ---" << endl;
 
     for (int i = 0; i < jumlahData; i++) {
         string text = (dataHewan + i)->jenisHewan;
@@ -336,9 +335,7 @@ void boyerMoore() {
             cout << "Jenis Hewan : " << (dataHewan + i)->jenisHewan << endl;
             cout << "Harga Hewan : Rp" << (dataHewan + i)->hargaHewan << endl;
             ditemukan++;
-        } else {
-            cout << "(-) Data Tidak Ditemukan" << endl;
-        }
+        }  
     }
 
     cout << "\n========================================" << endl;
