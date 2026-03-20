@@ -1,5 +1,6 @@
 #include <iostream>
 #include <conio.h>
+#include <string>
 #include <iomanip>
 using namespace std;
 
@@ -18,6 +19,12 @@ Hewan dataHewan[MAKS_DATA];
 void jeda() {
     cout << "\n[Tekan Enter Untuk Melanjutkan...]" << endl;
     getch();
+}
+
+void tukar(Hewan *a, Hewan *b) {
+    Hewan temp = *a;
+    *a = *b;
+    *b = temp;
 }
 
 void tambahHewan() {
@@ -83,21 +90,15 @@ void lihatData() {
 
         cout << header << endl;
 
-        for (Hewan *ptr = dataHewan; ptr < dataHewan + jumlahData; ptr++) {
-            cout << "| " << left << setw(4) << (*ptr).idHewan 
-            << "| " << setw(25) << (*ptr).namaHewan 
-            << "| " << setw(30) << (*ptr).jenisHewan 
-            << "| Rp" << setw(10) << (*ptr).hargaHewan << " |" << endl;
+        for (int i = 0; i < jumlahData; i++) {
+            cout << "| " << left << setw(4) << (dataHewan + i)->idHewan 
+                << "| " << setw(25) << (dataHewan + i)->namaHewan 
+                << "| " << setw(30) << (dataHewan + i)->jenisHewan 
+                << "| Rp" << setw(10) << (dataHewan + i)->hargaHewan << " |" << endl;
         }
         cout << header << endl;
         jeda();
     }
-}
-
-void tukar(Hewan *a, Hewan *b) {
-    Hewan temp = *a;
-    *a = *b;
-    *b = temp;
 }
 
 void bubbleSortNama() {
@@ -121,21 +122,26 @@ void bubbleSortNama() {
     }
 }
 
-void bubbleSortId() {
-    if (jumlahData == 0) {
-        cout << "(!) Tidak Ada Data Untuk Diurutkan!" << endl;
-        jeda();
-    } else {
-        for (int i = 0; i < jumlahData - 1; i++) {
-            for (int j = 0; j < jumlahData - i - 1; j++) {
-                Hewan *ptr1 = &dataHewan[j];
-                Hewan *ptr2 = &dataHewan[j + 1];
+int partition(int low, int high) {
+    int pivot = dataHewan[high].idHewan;
+    int i = (low - 1);
+    
+    for (int j = low; j <= high - 1; j++) {
+        if (dataHewan[j].idHewan < pivot) {
+            i++;
+            tukar(&dataHewan[i], &dataHewan[j]);
+        }
+    }
+    tukar(&dataHewan[i + 1], &dataHewan[high]);
+    return (i + 1);
+}
 
-                if ((*ptr1).idHewan > (*ptr2).idHewan) {
-                    tukar(ptr1, ptr2);
-                }
-            }
-        } 
+void quickSortId(int low, int high) {
+    if (low < high) {
+        int pi = partition(low, high);
+
+        quickSortId(low, pi - 1);
+        quickSortId(pi + 1, high);
     }
 }
 
@@ -170,20 +176,17 @@ void linearSearchNama() {
     getline(cin, target);
 
     bool ada = false;
-    Hewan *ptr1 = dataHewan;
-    Hewan *ptr2 = dataHewan + jumlahData;
-
-    while (ptr1 < ptr2) {
-        if (target == (*ptr1).namaHewan) {
+    
+    for (int i = 0; i < jumlahData; i++) {
+        if (target == (dataHewan + i)->namaHewan) {
             cout << "\n(+) Data Ditemukan!" << endl;
-            cout << "\nID Hewan    : " << (*ptr1).idHewan << endl;
-            cout << "Nama Hewan  : " << (*ptr1).namaHewan << endl;
-            cout << "Jenis Hewan : " << (*ptr1).jenisHewan << endl;
-            cout << "Harga Hewan : Rp" << (*ptr1).hargaHewan << endl;
+            cout << "\nID Hewan    : " << (dataHewan + i)->idHewan << endl;
+            cout << "Nama Hewan  : " << (dataHewan + i)->namaHewan << endl;
+            cout << "Jenis Hewan : " << (dataHewan + i)->jenisHewan << endl;
+            cout << "Harga Hewan : Rp" << (dataHewan + i)->hargaHewan << endl;
             ada = true;
             break;
         }
-        ptr1++;
     }
 
     if (!ada) {
@@ -201,7 +204,7 @@ void fibbonaciSearchId() {
         return;
     }
     
-    bubbleSortId();
+    quickSortId(0, jumlahData - 1);
 
     cout << "\nCari ID Hewan: ";
     cin >> target;
@@ -300,7 +303,7 @@ void menuUtama() {
             selectionSortHarga();
         } else if (pilihan == '7') {
             cout << "\nTerima Kasih Telah Menggunakan Program Ini!" << endl;
-            jeda();
+            cout << endl;
             break;
         } else {
             cout << "\n(!) Pilihan Tidak Valid!" << endl;
