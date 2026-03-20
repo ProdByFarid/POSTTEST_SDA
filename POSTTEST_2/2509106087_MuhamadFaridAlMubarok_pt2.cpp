@@ -174,10 +174,14 @@ void linearSearchNama() {
     cout << "\nCari Nama Hewan: ";
     cin.ignore();
     getline(cin, target);
+    cout << endl;
+
 
     bool ada = false;
+    int iterasi = 0;
     
     for (int i = 0; i < jumlahData; i++) {
+        cout << "Iterasi " << iterasi + 1 << ": Dengan Indeks Ke-" << i << " Adalah " << (dataHewan + i)->namaHewan << endl; 
         if (target == (dataHewan + i)->namaHewan) {
             cout << "\n(+) Data Ditemukan!" << endl;
             cout << "\nID Hewan    : " << (dataHewan + i)->idHewan << endl;
@@ -187,6 +191,7 @@ void linearSearchNama() {
             ada = true;
             break;
         }
+        iterasi++;
     }
 
     if (!ada) {
@@ -313,16 +318,16 @@ void menuUtama() {
 }
 
 int main() {
-    dataHewan[0] = {74, "Beef", "Chihuahua", 850000};
-    dataHewan[1] = {13, "Ciko", "Ikan Badut", 800000};
-    dataHewan[2] = {22, "Fluxx", "Ginger Cat", 650000};
-    dataHewan[3] = {31, "Gary", "Siput Laut", 600000};
-    dataHewan[4] = {26, "Kuma The Destoyer", "Beruang Grizly", 450000};
-    dataHewan[5] = {2, "Heli", "Russian Grayish-Blue", 550000};
-    dataHewan[6] = {7, "Emily", "Tikus", 700000};
-    dataHewan[7] = {16, "Dune", "Japanese Macaque", 750000};
-    dataHewan[8] = {45, "Judy", "Kelinci", 500000};
-    dataHewan[9] = {67, "Astra", "Rubah", 900000};
+    dataHewan[0] = {74, "beef", "chihuahua", 850000};
+    dataHewan[1] = {13, "ciko", "ikan badut", 800000};
+    dataHewan[2] = {22, "fluxx", "ginger cat", 650000};
+    dataHewan[3] = {31, "gary", "siput laut", 600000};
+    dataHewan[4] = {26, "kuma", "beruang grizly", 450000};
+    dataHewan[5] = {2, "heli", "russian grayish-blue", 550000};
+    dataHewan[6] = {7, "emily", "tikus", 700000};
+    dataHewan[7] = {16, "dune", "japanese macaque", 750000};
+    dataHewan[8] = {45, "judy", "kelinci", 500000};
+    dataHewan[9] = {67, "astra", "rubah", 900000};
     jumlahData = 10;
 
     menuUtama();
